@@ -1,0 +1,8 @@
+prefix=/home/nvidia/catkin_ws/install
+
+Name: pathing
+Description: Description of pathing
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/nvidia/catkin_ws/install/lib 
+Requires: message_runtime

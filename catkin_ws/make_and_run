@@ -1,0 +1,3 @@
+catkin_make
+rosrun serial_node serial_write
+
