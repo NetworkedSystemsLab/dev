@@ -1,0 +1,44 @@
+#include <pthread.h>
+#include <iostream>
+#include <string>
+#include <unistd.h>
+
+using namespace std;
+
+class Timer
+{
+public:
+ unsigned int ms, s, min, hr;
+ Timer(unsigned int ms=0, unsigned int s=0, unsigned int min=0, unsigned int hr=0):
+ ms(ms), s(s), min(min), hr(hr) {}
+
+ void print()
+ {
+  
+ }
+ void tick()
+ {
+  ms++;
+  if(ms > 1000)
+  {
+   ms = 0;
+   s++;
+   if(s > 60)
+   {
+    s = 0;
+    min++;
+    if(min > 60)
+    {
+     min = 0;
+     hr++;
+    }
+   }
+  }
+ }
+};
+
+int main(int argc, char** argv)
+{
+ 
+ return 0;
+}

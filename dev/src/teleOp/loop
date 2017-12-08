@@ -1,0 +1,8 @@
+cls
+
+cat throttle.txt
+
+cat steering.txt
+
+sleep 0.1
+./loop
