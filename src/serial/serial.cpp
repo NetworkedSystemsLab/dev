@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <termios.h>
 #include <time.h>
+#include <pthread.h>
 
 #define ERROR_THRESHOLD 1000
 
@@ -12,12 +13,12 @@
 #define NEUTRAL 1600
 #define FULL_THROTTLE 2000
 
-#define FULL_LEFT 66
+#define FULL_LEFT 60
 #define PARK_ANGLE 90
-#define FULL_RIGHT 131
+#define FULL_RIGHT 130
 
-#define THROTTLE_FILE "throttle"
-#define STEERING_FILE "steering"
+#define THROTTLE_FILE "../py/teleOp/throttle.txt"
+#define STEERING_FILE "../py/teleOp/steering.txt"
 int THROTTLE_ERROR = 0;
 int STEERING_ERROR = 0;
 
@@ -28,16 +29,41 @@ int open_port(void);
 //prepare serial for writing
 int configure_port(int fd);
 
+void zeroize(int fd)
+{
+ char n_s=90, n_m=60;
+ write(fd, &n_m, 1);
+ write(fd, &n_s, 1);
+}
+
+void* quit(void* arg)
+{
+ int* val = (int*)arg;
+ int i = 3;
+ scanf("%d", &i);
+ while(i != 0)
+ {
+  *val = 0;
+  scanf("%d", &i);
+ }
+ *val = 1;
+ return NULL;
+}
 int main(void)
 {
   int fd = open_port();
   configure_port(fd);
 
+  int quit_flag = 0;
+
+  pthread_t thread;
+  pthread_create( &thread, NULL, quit, &quit_flag );
+
   int previous_steering_angle = PARK_ANGLE;
   int previous_throttle_rpm = NEUTRAL;
   int current_steering_angle = PARK_ANGLE;
   int current_throttle_rpm = NEUTRAL;
-  for(;;)
+  while(quit_flag == 0)
   {
     FILE* throttle_file = fopen(THROTTLE_FILE, "r");
     FILE* steering_file = fopen(STEERING_FILE, "r");
@@ -74,6 +100,7 @@ int main(void)
     fclose(steering_file);
   }
 
+  zeroize(fd);
   close(fd);
   return 0;
 }

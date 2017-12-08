@@ -8,13 +8,13 @@
 
 #define ERROR_THRESHOLD 1000
 
-#define FULL_REVERSE 1000;
-#define NEUTRAL 1500;
-#define FULL_THROTTLE 2000;
+#define FULL_REVERSE 1000
+#define NEUTRAL 1600
+#define FULL_THROTTLE 2000
 
-#define FULL_LEFT 66;
-#define PARK_ANGLE 90;
-#define FULL_RIGHT 131;
+#define FULL_LEFT 66
+#define PARK_ANGLE 90
+#define FULL_RIGHT 131
 
 #define THROTTLE_FILE "throttle"
 #define STEERING_FILE "steering"
@@ -37,14 +37,14 @@ int main(void)
   int previous_throttle_rpm = NEUTRAL;
   int current_steering_angle = PARK_ANGLE;
   int current_throttle_rpm = NEUTRAL;
-  for(1)
+  for(;;)
   {
     FILE* throttle_file = fopen(THROTTLE_FILE, "r");
     FILE* steering_file = fopen(STEERING_FILE, "r");
 
     fscanf(throttle_file, "%d", &current_throttle_rpm);
     fscanf(steering_file, "%d", &current_steering_angle);
-    if(FULL_REVERSE <= current_throttle_rpm && current_throttle_rpm <= FULL_FORWARD)
+    if(FULL_REVERSE <= current_throttle_rpm && current_throttle_rpm <= FULL_THROTTLE)
     {
       previous_throttle_rpm = current_throttle_rpm;
     } else {
@@ -52,7 +52,7 @@ int main(void)
     }
     if(FULL_LEFT <= current_steering_angle && current_steering_angle <= FULL_RIGHT)
     {
-      previous_steering_angle = current_throttle_angle;
+      previous_steering_angle = current_steering_angle;
     } else {
       STEERING_ERROR++;
     }
