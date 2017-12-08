@@ -1,0 +1,4 @@
+git rm -r $1
+clear
+git status
+

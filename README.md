@@ -1,27 +1,44 @@
 # root
 Main depo for NSL Self Driving Car, AutoKnight
-To update the github from the working directory on the jetson, open a terminal:
+Steps to update github from the terminal:
 
-Recursively move all files from the working directory to the github directory
+1) Make your changes in the ~/root/dev directory
 
-cp -rp ~/dev ~/root
+2) When ready to save to github, type:
 
-Check the status of the github changes
+cd ~/root
 
-git status
+3) Check what needs to be done to commit your changes:
 
-Remove files from the github directory
+./statusgit
 
-git rm (removed file)
+If there are files that are missing (i.e. you need to add new or modified files),
+go to step 4). If there are files that need to be removed from git, go to step 5). if there is nothing to be done, there are no changes
 
-git rm -r /directory/subdirectory/*
+4) Add new or modified files to git:
 
-git add (added file)
+./addgit [directory_name] # to add all files from a directory
 
-git add /directory
+or
 
-once you’re done, do git status again to make sure all the messages are green (or your branch is up-to-date with ‘origin/master’.
+./addgit [directory_name]/[file_name] # to add a specific file
 
-git commit 
+5) Remove a file from git:
 
-git push
+./recrmgit [directory_name]/* # to recursively remove all files from a directory
+
+or
+
+./rmgit [directory_name]/[file_name] # to remove a specific file
+
+6) Apply your changes
+
+./gitcommit
+
+7) Upload the changes to github:
+
+./pushgit
+
+8) if your system is out of sync with git, or to return to the current git:
+
+./pullgit
