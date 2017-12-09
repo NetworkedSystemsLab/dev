@@ -277,6 +277,8 @@ int main(int argc, char** argv)
    {
     showDash(car);
     validated = true;
+   } else {
+    usleep(10);
    }
   } else {
    //time to reprint
