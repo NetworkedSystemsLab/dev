@@ -210,7 +210,7 @@ def showDash(teleOp):
                ****************************************************************************
                Press "0" to Terminate
         
-               TeleOp by: Behrad Toghi, NSL
+               TeleOp by: Behrad Toghi, Christian Theriot - NSL
                ****************************************************************************                                                               
                ''')
 
