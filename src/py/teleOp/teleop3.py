@@ -1,6 +1,6 @@
 '''
 TeleOp Program for NSL_S2AV
-@Author: Behrad Toghi
+@Author: Behrad Toghi, Christian Theriot
 @Version: 1.1.2
 #SSH added - highspeed enabled
 '''
